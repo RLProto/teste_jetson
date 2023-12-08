@@ -1,0 +1,33 @@
+#Com o python instalado, atualizar pacotes:
+sudo apt update
+
+No vscode, abrir diretório do projeto
+
+#criar venv:
+python3 -m venv venv
+
+#ativar venv:
+source venv/bin/activate
+
+#instalar bibliotecas:
+pip3 install ultralytics
+pip3 install opencv-python
+
+#desinstalar bibliotecas do pytorch incompatíveis com a jetson
+pip3 uninstall torch
+pip3 uninstall torchvision
+
+#instalar torch
+wget https://nvidia.box.com/shared/static/fjtbno0vpo676a25cgvuqc1wty0fkkg6.whl -O torch-1.10.0-cp36-cp36m-linux_aarch64.whl
+sudo apt-get install python3-pip libopenblas-base libopenmpi-dev libomp-dev
+pip3 install Cython<3
+pip3 install numpy torch-1.10.0-cp36-cp36m-linux_aarch64.whl
+
+#instalar torchvision
+sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libopenblas-dev libavcodec-dev libavformat-dev libswscale-dev
+git clone --branch <version> https://github.com/pytorch/vision torchvision   # see below for version of torchvision to download
+cd torchvision
+export BUILD_VERSION=0.x.0  # where 0.11.1 is the torchvision version  
+python3 setup.py install --user
+cd ../  # attempting to load torchvision from build dir will result in import error
+
