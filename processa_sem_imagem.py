@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 # Environment variables
 node_red_endpoint = "http://100.100.210.26:1880/teste1"
 heartbeat_endpoint = "http://100.100.210.26:1880/teste2"
-camera_ip = "rtsp://teste:Ambev123@192.168.0.109:554/cam/realmonitor?channel=1&subtype=1"
+camera_ip = "rtsp://teste:Ambev123@192.168.137.3:554/cam/realmonitor?channel=1&subtype=1"
 heartbeat_interval = 60  # Heartbeat interval in seconds
 
 # Load the YOLO model
@@ -104,12 +104,12 @@ def process_frames():
         detection_scores = object_detection(frame)
         if detection_scores:
             logging.info("Detection Scores: %s", detection_scores)
-            send_to_node_red(detection_scores)
+            #send_to_node_red(detection_scores)
 
         # Heartbeat
         current_time = time.time()
         if current_time - last_heartbeat_time >= heartbeat_interval:
-            send_heartbeat_to_node_red(1)
+            #send_heartbeat_to_node_red(1)
             last_heartbeat_time = current_time
 
         time.sleep(1)  # Delay before processing the next frame
